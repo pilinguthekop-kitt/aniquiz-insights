@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AniQuiz Insights</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div class="brand">Ani<span>Quiz</span> Insights</div>
+    <nav>
+      <button data-view="home" class="active">Play</button>
+      <button data-view="stats">Stats</button>
+      <button data-view="items">Item analysis</button>
+      <button data-view="about">About</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Home -->
+    <section id="view-home" class="view">
+      <h1>Test your anime knowledge, then look at the data.</h1>
+      <p class="muted">Every answer is logged locally so you can see accuracy, speed and weak spots.</p>
+      <div class="cards">
+        <button class="card mode" data-mode="daily">
+          <h3>Daily challenge</h3><p>Same 10 questions for everyone today.</p>
+        </button>
+        <button class="card mode" data-mode="all">
+          <h3>Mixed</h3><p>10 random questions from all categories.</p>
+        </button>
+      </div>
+      <h2>By category</h2>
+      <div class="cards" id="cat-cards"></div>
+    </section>
+
+    <!-- Quiz -->
+    <section id="view-quiz" class="view hidden">
+      <div class="quiz-head">
+        <span id="q-progress"></span>
+        <span id="q-cat" class="pill"></span>
+        <span id="q-timer"></span>
+      </div>
+      <div class="bar"><div id="q-bar"></div></div>
+      <h2 id="q-text"></h2>
+      <div id="q-options" class="options"></div>
+      <button id="q-next" class="primary hidden">Next</button>
+    </section>
+
+    <!-- Result -->
+    <section id="view-result" class="view hidden">
+      <h1 id="r-score"></h1>
+      <p id="r-detail" class="muted"></p>
+      <ol id="r-review" class="review"></ol>
+      <div class="row">
+        <button class="primary" data-view="home">Play again</button>
+        <button data-view="stats">See my stats</button>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section id="view-stats" class="view hidden">
+      <h1>Your stats</h1>
+      <div class="kpis" id="kpis"></div>
+      <div class="grid">
+        <div class="panel"><h3>Accuracy by category</h3><canvas id="ch-cat"></canvas></div>
+        <div class="panel"><h3>Response time distribution</h3><canvas id="ch-time"></canvas></div>
+        <div class="panel wide"><h3>Learning curve (score per quiz)</h3><canvas id="ch-curve"></canvas></div>
+      </div>
+      <div class="row">
+        <button id="export-csv">Export CSV</button>
+        <button id="reset" class="danger">Reset data</button>
+      </div>
+    </section>
+
+    <!-- Item analysis -->
+    <section id="view-items" class="view hidden">
+      <h1>Item analysis</h1>
+      <p class="muted">Difficulty index (p) = share of attempts answered correctly. p &lt; 0.3 is hard, p &gt; 0.8 is easy.</p>
+      <div class="table-wrap"><table id="items-table"></table></div>
+    </section>
+
+    <!-- About -->
+    <section id="view-about" class="view hidden">
+      <h1>About</h1>
+      <p>AniQuiz Insights is a non-commercial portfolio project. It combines a trivia quiz with a personal analytics dashboard, applying item-analysis ideas from test design and quality control.</p>
+      <p>All questions are original text written for this project. Anime titles, character names and studio names belong to their respective owners; no official images, audio or synopses are hosted here. This site is not affiliated with any studio, publisher, AniList or MyAnimeList.</p>
+      <p>Data stays in your browser (localStorage). Nothing is sent to a server.</p>
+      <p>Takedown or correction requests: please open an issue on the project repository.</p>
+    </section>
+  </main>
+
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
